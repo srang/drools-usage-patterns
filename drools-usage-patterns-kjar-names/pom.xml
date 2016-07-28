@@ -8,10 +8,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>drools-usage-patterns-kjar</artifactId>
+	<artifactId>drools-usage-patterns-kjar-names</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Patterns Kjar</name>
+	<name>Drools Usage Patterns Kjar for Names</name>
 
 	<dependencies>
 		<dependency>

@@ -14,9 +14,12 @@ public class KieBaseProvider {
 	
 	
 	public KieBaseProvider() {
+		this("drools-usage-patterns-kjar-names");
+	}
+
+	public KieBaseProvider(String artifactId) {
 		//The releaseId uses maven groupId, artifactId, and version to specify a kjar (set of rules)
 		String groupId = "com.rhc.drools.example";
-		String artifactId = "drools-usage-patterns-kjar";
 		String version = "1.0.0-SNAPSHOT";
 		ReleaseId releaseId = KIE_SERVICES.newReleaseId(groupId, artifactId, version);
 		

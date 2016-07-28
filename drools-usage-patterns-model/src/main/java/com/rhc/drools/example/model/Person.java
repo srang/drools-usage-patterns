@@ -2,7 +2,10 @@ package com.rhc.drools.example.model;
 
 public class Person {
 	private String name;
+	private String lastName = "";
 	private Integer age;
+	public String getLastName() { return this.lastName; }
+	public void setLastName(String name) { this.lastName = name; }
 	public String getName() {
 		return name;
 	}
@@ -17,6 +20,6 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", age=" + age + "]";
+		return "Person [name=" + name + " " + lastName + ", age=" + age + "]";
 	}
 }

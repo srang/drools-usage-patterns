@@ -18,7 +18,8 @@
 
 	<modules>
 		<module>drools-usage-patterns-embedded</module>
-		<module>drools-usage-patterns-kjar</module>
+		<module>drools-usage-patterns-kjar-names</module>
+		<module>drools-usage-patterns-kjar-ages</module>
 		<module>drools-usage-patterns-model</module>
 		<module>drools-usage-patterns-remote</module>
 		<module>drools-usage-patterns-fetch</module>

@@ -1,0 +1,16 @@
+package com.rhc.drools.example
+import com.rhc.drools.example.model.Person;
+
+rule "Sal's age"
+when
+	$sal : Person(name == "Sal", age != 55)
+then
+	$sal.setAge(55);
+end
+
+rule "Everyone else's age"
+when
+    $person : Person(name != "Sal")
+then
+    $person.setAge(26);
+end

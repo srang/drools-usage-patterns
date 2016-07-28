@@ -1,16 +1,25 @@
 package com.rhc.drools.example
-import com.rhc.drools.example.model.Person;
+import com.rhc.drools.example.model.Name;
 
-rule "Sal's age"
+rule "Sal's name"
 when
-	$sal : Person(name == "Sal", age != 55)
+	$sal : Name(firstName == "Sal", lastName != "Elrahal")
 then
-	$sal.setAge(55);
+	$sal.setLastName("Elrahal");
 end
 
-rule "Everyone else's age"
+rule "Sam's name"
 when
-    $person : Person(name != "Sal")
+	$sal : Name(firstName == "Sam", lastName != "Rang")
 then
-    $person.setAge(26);
+	$sal.setLastName("Rang");
 end
+
+rule "Everybody else"
+when
+	$otherName : Name(firstName != "Sal")
+then
+    $otherName.setFirstName("Sam");
+end
+
+

@@ -1,15 +1,15 @@
 package com.rhc.drools.example.model;
 
-public class Name {
+public class MyName {
 
     private String firstName;
     private String lastName;
 
-    public Name(String firstName) {
+    public MyName(String firstName) {
         this(firstName,null);
     }
 
-    public Name(String firstName, String lastName) {
+    public MyName(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -26,7 +26,7 @@ public class Name {
 
     @Override
     public boolean equals(Object Oname) {
-        Name name = (Name) Oname;
+        MyName name = (MyName) Oname;
         return name.getFirstName().equals(this.firstName) && name.getLastName().equals(this.lastName);
     }
 }

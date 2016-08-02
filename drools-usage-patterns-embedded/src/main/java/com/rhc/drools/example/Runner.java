@@ -4,7 +4,7 @@ import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
 
 import com.rhc.drools.example.kie.EmbeddedKieBaseProvider;
-import com.rhc.drools.example.model.Person;
+import com.rhc.drools.example.persistence.Person;
 
 public class Runner {
 	public static void main(String[] args) {

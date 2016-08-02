@@ -5,7 +5,7 @@ import org.drools.core.command.runtime.rule.FireAllRulesCommand;
 import org.drools.core.command.runtime.rule.InsertObjectCommand;
 import org.kie.api.runtime.ExecutionResults;
 
-import com.rhc.drools.example.model.Person;
+import com.rhc.drools.example.persistence.Person;
 import com.rhc.drools.example.util.RemoteCommandExecutor;
 
 public class Runner {

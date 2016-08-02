@@ -1,5 +1,5 @@
 package com.rhc.drools.example
-import com.rhc.drools.example.model.Name;
+import com.rhc.drools.example.persistence.Name;
 
 rule "Sal's name"
 when

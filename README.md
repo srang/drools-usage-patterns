@@ -39,7 +39,7 @@ Next, navigate to the `drools-usage-patterns-kjar` and alter the `name.drl` file
 
 ```drl
 package com.rhc.drools.example
-import com.rhc.drools.example.model.Person;
+import com.rhc.drools.example.persistence.Person;
 
 rule "Sal's age"
 when

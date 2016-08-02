@@ -1,8 +1,13 @@
-package com.rhc.drools.example.model;
+package com.rhc.drools.example.persistence;
 
 public class Person {
 	private Name name;
 	private Integer age;
+	public Person() {}
+	public Person (Name name, Integer age) {
+		this.name = name;
+		this.age = age;
+	}
 	public Name getName() { return this.name; }
 	public void setName(Name name) { this.name = name; }
 	public Integer getAge() { return age; }

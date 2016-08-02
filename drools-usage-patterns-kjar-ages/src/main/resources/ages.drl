@@ -1,6 +1,6 @@
 package com.rhc.drools.example
-import com.rhc.drools.example.model.Person;
-import com.rhc.drools.example.model.Name;
+import com.rhc.drools.example.persistence.MyPerson;
+import com.rhc.drools.example.persistence.MyName;
 
 rule "Sal's age"
 when
@@ -13,5 +13,5 @@ rule "Sam's age"
 when
     $sam : Person(name.firstName == "Sam", name.lastName == "Rang")
 then
-    $sam.setAge(26);
+    $sam.setAge(28);
 end

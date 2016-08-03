@@ -19,25 +19,23 @@ public class Runner {
 		KieBase kieBaseNames = kbp1.getKieBase();
 
 		//Continually evaluate ruleset to see changes
-		Person person1 = new Person();
-		Name name1 = new Name("Sal");
-		person1.setName(name1);
+		MyPerson person1 = new MyPerson(new MyName("Sal"), null);
+		MyName name1 = person1.getName();
 
-		Person person2 = new Person();
-		Name name2 = new Name("John");
-		person2.setName(name2);
+		MyPerson person2 = new MyPerson(new MyName("John"),null);
+		MyName name2 = person2.getName();
 		while (true) {
 			//Create a Fact
 
-			MyPerson p1 = PersonMapper.peopleMap(person1);
-			MyPerson p2 = PersonMapper.peopleMap(person2);
-			MyName n1 = p1.getName();
-			MyName n2 = p2.getName();
+			Person p1 = PersonMapper.peopleMap(person1);
+			Person p2 = PersonMapper.peopleMap(person2);
+			Name n1 = p1.getName();
+			Name n2 = p2.getName();
 			System.out.println("Pre-evaluation");
 			System.out.println(p1);
 			System.out.println(p2);
 
-			fireRules(kieBaseNames, MyName.class, n1, n2);
+			fireRules(kieBaseNames, Name.class, n1, n2);
 			p1.setName(n1);
 			p2.setName(n2);
 
@@ -45,7 +43,7 @@ public class Runner {
 			System.out.println(p1);
 			System.out.println(p2);
 			//Determine age with Drools
-			fireRules(kieBaseAges, MyPerson.class, p1, p2);
+			fireRules(kieBaseAges, Person.class, p1, p2);
 			//fireRules(kieBaseAges, Person.class, person2);
 
 			System.out.println("Final");

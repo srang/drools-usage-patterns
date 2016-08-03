@@ -1,6 +1,6 @@
 package com.rhc.drools.example
-import com.rhc.drools.example.persistence.MyPerson;
-import com.rhc.drools.example.persistence.MyName;
+import com.rhc.drools.example.persistence.Person;
+import com.rhc.drools.example.persistence.Name;
 
 rule "Sal's age"
 when

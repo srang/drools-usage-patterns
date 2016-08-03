@@ -8,8 +8,9 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>drools-usage-patterns-model</artifactId>
+	<artifactId>drools-usage-patterns-persistence</artifactId>
 	<packaging>jar</packaging>
+	<version>1.0.0-SNAPSHOT</version>
 
-	<name>Drools Usage Patterns Model</name>
+	<name>Drools Usage Patterns Persistence</name>
 </project>

@@ -26,7 +26,7 @@ public class KieBaseProvider {
 		//This KieContainer will be built using the kjar specified by the provided
 		//releaseId. KieServices will use maven to fetch the kjar.
 		KIE_CONTAINER = KIE_SERVICES.newKieContainer(releaseId);
-		
+
 		//This call will create a scanner and associate it to our kie container. The scanner will poll
 		//the maven repo for updates and automatically update the kiecontainer.
 		KIE_SCANNER =  KIE_SERVICES.newKieScanner(KIE_CONTAINER);

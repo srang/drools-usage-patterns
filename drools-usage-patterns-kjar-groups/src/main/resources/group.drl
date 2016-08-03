@@ -1,0 +1,63 @@
+package com.rhc.drools.example
+
+import com.rhc.drools.example.persistence.Person;
+import com.rhc.drools.example.persistence.Team;
+import com.rhc.drools.example.persistence.Name;
+import com.rhc.drools.example.persistence.Problem;
+import java.math.BigDecimal;
+
+rule "check person name" agenda-group "person"
+    when
+        $team : Team($ppl : !members.isEmpty())
+        $person : Person(name.firstName == "Sam", age != 25)
+    then
+        $person.setAge(25);
+        $team.addProblem(new Problem("Sam wasn't the right age", "scrubbed"));
+end
+
+
+
+//rule "scrub procedure code" agenda-group "property"
+//    when
+//        $claim : ClaimEvaluated($sls: serviceLines != null)
+//        $sl : ServiceLineSubmitted(procedureCode == "99999" && evaluationResult == null) from $sls
+//    then
+//        $sl.setProcedureCode("99199");
+//        $claim.getCoreEvaluations().add(new EvaluationResult("Data Validation", "replaced invalid CPT code", "core", "scrubbed"));
+//end
+//
+//rule "billed total matches sum of lines" agenda-group "property"
+//    when
+//        ClaimEvaluated($sls : serviceLines != null)
+//        $total : BigDecimal() from accumulate(
+//         ServiceLineSubmitted($s : serviceBilledChargedAmount) from $sls,
+//         sum($s)
+//        )
+//        $claim : ClaimEvaluated(!totalBilledChargedAmount.equals($total))
+//    then
+//        $claim.getCoreEvaluations().add(new EvaluationResult("Calculation Validation","incorrect charge amounts", "core", "rejected"));
+//end
+//
+//rule "change agenda" agenda-group "property"
+//    salience -100
+//    when
+//        ClaimEvaluated()
+//    then
+//      kcontext.getKieRuntime().getAgenda().getAgendaGroup("claim").setFocus();
+//end
+//
+//rule "set rejected claim status based on property evaluations" agenda-group "claim"
+//    when
+//        $rejected : EvaluationResult(resultType == "rejected")
+//        $claim : ClaimEvaluated(status == "unevaluated", coreEvaluations contains $rejected)
+//    then
+//        $claim.setStatus("finalized - rejected");
+//end
+//
+//rule "set completed claim status based on property evaluations" agenda-group "claim"
+//    when
+//        $rejected : EvaluationResult(resultType == "rejected")
+//        $claim : ClaimEvaluated(status == "unevaluated", !(coreEvaluations contains $rejected))
+//    then
+//        $claim.setStatus("finalized - completed");
+//end

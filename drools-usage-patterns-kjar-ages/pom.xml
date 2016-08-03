@@ -16,7 +16,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.rhc.drools.example</groupId>
-			<artifactId>drools-usage-patterns-model</artifactId>
+			<artifactId>drools-usage-patterns-persistence</artifactId>
+			<version>${parent.version}</version>
 		</dependency>
 	</dependencies>
 </project>

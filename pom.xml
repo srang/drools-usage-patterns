@@ -17,11 +17,10 @@
 	</properties>
 
 	<modules>
-		<module>drools-usage-patterns-embedded</module>
 		<module>drools-usage-patterns-kjar-names</module>
 		<module>drools-usage-patterns-kjar-ages</module>
-		<module>drools-usage-patterns-model</module>
-		<module>drools-usage-patterns-remote</module>
+		<module>drools-usage-patterns-kjar-groups</module>
+		<module>drools-usage-patterns-persistence</module>
 		<module>drools-usage-patterns-fetch</module>
 	</modules>
 
@@ -65,7 +64,7 @@
 
 			<dependency>
 				<groupId>com.rhc.drools.example</groupId>
-				<artifactId>drools-usage-patterns-model</artifactId>
+				<artifactId>drools-usage-patterns-persistence</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

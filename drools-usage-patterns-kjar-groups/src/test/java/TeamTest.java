@@ -35,7 +35,7 @@ public class TeamTest {
     public void setUp() throws Exception {
 
         KieContainer KIE_CONTAINER = KIE_SERVICES.newKieClasspathContainer();
-        KieBase kieBase = KIE_CONTAINER.getKieBase();
+        KieBase kieBase = KIE_CONTAINER.getKieBase("groups");
         kieSession = kieBase.newKieSession();
         //Start the polling every POLLING_INTERVAL milliseconds
         kieSession.addEventListener(new DebugRuleRuntimeEventListener());
@@ -52,7 +52,7 @@ public class TeamTest {
     }
 
     @Test
-    public void testMedicareDeductibleAmount() throws ParseException {
+    public void testTeam() throws ParseException {
         Team team = new Team(faker.team().name());
         for (int i = 0; i<20; i++) {
             team.addMember(new Person(new Name(faker.name().firstName(), faker.name().lastName()), faker.number().numberBetween(14,50)));

@@ -6,13 +6,14 @@ import com.rhc.drools.example.persistence.Name;
 import com.rhc.drools.example.persistence.Problem;
 import java.math.BigDecimal;
 
-rule "check person name" agenda-group "person"
+
+rule "check person name"
     when
-        $team : Team($ppl : !members.isEmpty())
-        $person : Person(name.firstName == "Sam", age != 25)
+        $team : Team()
     then
-        $person.setAge(25);
         $team.addProblem(new Problem("Sam wasn't the right age", "scrubbed"));
+        System.out.println("rule fires");
+
 end
 
 

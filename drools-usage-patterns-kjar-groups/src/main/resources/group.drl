@@ -4,24 +4,97 @@ import com.rhc.drools.example.persistence.Person;
 import com.rhc.drools.example.persistence.Team;
 import com.rhc.drools.example.persistence.Name;
 import com.rhc.drools.example.persistence.Problem;
+import com.rhc.drools.example.persistence.TeamEvaluation;
 import java.math.BigDecimal;
 
 
 rule "check person name"
+    agenda-group "properties"
     when
-        $team : Team()
+        $team : Team($ppl : members)
+        $sam : Person(name.firstName == "Sam" && age != 25) from $ppl
     then
+        System.out.println("Member evaluated: "+ $sam.getName().toString());
+        System.out.println("   On Team: "+ $team.getTeamName());
+        $sam.setAge(25);
         $team.addProblem(new Problem("Sam wasn't the right age", "scrubbed"));
-        System.out.println("rule fires");
-
 end
 
+rule "team budget matches sum of donations"
+    agenda-group "properties"
+    when
+        $team: Team($ppl : members)
+        $num : Number(doubleValue - $team.getBudget().doubleValue() > .005) from accumulate(
+            Person($donation : donation) from $ppl,
+            sum($donation)
+        )
+    then
+        System.out.println("Team evaluated: " + $team.getTeamName());
+        System.out.println("  with reported budget: $" + $team.getBudget());
+        System.out.println("  with actual budget: $" + $num.toString());
+        $team.addProblem(new Problem("The donations don't add up to the budget", "rejected"));
+end
 
+rule "Property evaluation complete"
+    salience -100
+    agenda-group "properties"
+    when
+        Team()
+    then
+        System.out.println("Property evaluation complete. Moving on to Comprehensive evaluation.");
+        kcontext.getKieRuntime().getAgenda().getAgendaGroup("whole").setFocus();
+end
+
+rule "Evaluate team with rejections"
+    agenda-group "whole"
+    when
+        $team : Team(evaluation.status == "Unevaluated Submitted", $pbls: problems)
+        Problem(status == "rejected") from $pbls
+    then
+        $team.setEvaluation("Finalized - Rejected");
+        System.out.println("Team final evaluation: " + $team.getTeamName());
+        System.out.println("  with status: " + $team.getEvaluation());
+end
+
+rule "Evaluate team with scrubs"
+    agenda-group "whole"
+    when
+        $team : Team(evaluation.status == "Unevaluated Submitted", $problems : problems)
+        not (Problem(status == "rejected") from $problems)
+        Problem(status == "scrubbed") from $problems
+    then
+        $team.setEvaluation("Finalized - Scrubbed");
+        System.out.println("Team final evaluation: " + $team.getTeamName());
+        System.out.println("  with status: " + $team.getEvaluation());
+end
+
+rule "Evaluate team with no rejections or scrubs"
+    agenda-group "whole"
+    when
+        $team : Team(evaluation.status == "Unevaluated Submitted", $problems : problems)
+        not (Problem(status == "rejected") from $problems)
+        not (Problem(status == "scrubbed") from $problems)
+    then
+        $team.setEvaluation("Finalized - Complete");
+        System.out.println("Team final evaluation: " + $team.getTeamName());
+        System.out.println("  with status: " + $team.getEvaluation());
+end
+
+//rule "Evaluate team with no rejections or scrubs"
+//    agenda-group "whole"
+//    salience -100
+//    when
+//        $team : Team(evaluation.status == "Unevaluated Submitted")
+//    then
+//        $team.setEvaluation("Finalized - Incomplete");
+//        System.out.println("Team final evaluation: " + $team.getTeamName());
+//        System.out.println("  with undetermined status: " + $team.getEvaluation());
+//end
 
 //rule "scrub procedure code" agenda-group "property"
 //    when
 //        $claim : ClaimEvaluated($sls: serviceLines != null)
-//        $sl : ServiceLineSubmitted(procedureCode == "99999" && evaluationResult == null) from $sls
+//        $sl : ServiceLineSubmitted(procedureCode == "99999") from $sls
 //    then
 //        $sl.setProcedureCode("99199");
 //        $claim.getCoreEvaluations().add(new EvaluationResult("Data Validation", "replaced invalid CPT code", "core", "scrubbed"));
@@ -29,12 +102,11 @@ end
 //
 //rule "billed total matches sum of lines" agenda-group "property"
 //    when
-//        ClaimEvaluated($sls : serviceLines != null)
-//        $total : BigDecimal() from accumulate(
-//         ServiceLineSubmitted($s : serviceBilledChargedAmount) from $sls,
-//         sum($s)
+//        $claim : ClaimEvaluated($sls : serviceLines)
+//        $total : Number(doubleValue - $claim.getTotalBilledChargedAmount.doubleValue() > 0.005) from accumulate(
+//           ServiceLineSubmitted($lineAmount : serviceBilledChargedAmount) from $sls,
+//           sum($lineAmount)
 //        )
-//        $claim : ClaimEvaluated(!totalBilledChargedAmount.equals($total))
 //    then
 //        $claim.getCoreEvaluations().add(new EvaluationResult("Calculation Validation","incorrect charge amounts", "core", "rejected"));
 //end
@@ -62,3 +134,4 @@ end
 //    then
 //        $claim.setStatus("finalized - completed");
 //end
+

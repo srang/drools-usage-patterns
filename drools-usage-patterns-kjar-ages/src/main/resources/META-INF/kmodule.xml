@@ -1,3 +1,1 @@
-<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
-    <kbase name="groups" packages="com.rhc.drools.example" default="true"/>
-</kmodule>
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>

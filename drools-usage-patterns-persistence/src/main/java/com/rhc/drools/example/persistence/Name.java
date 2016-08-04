@@ -21,7 +21,7 @@ public class Name {
 
     @Override
     public String toString() {
-        return "[firstName=" + ((firstName!=null)?firstName:"") + ", lastName=" + ((lastName!=null)?lastName:"") + "]";
+        return "{ " + ((firstName!=null)?firstName:"") + " " + ((lastName!=null)?lastName:"") + " }";
     }
 
     @Override

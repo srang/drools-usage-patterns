@@ -1,75 +1,67 @@
 package com.rhc.drools.example;
 
+import com.github.javafaker.Faker;
 import com.rhc.drools.example.kie.KieBaseProvider;
-import com.rhc.drools.example.model.MyName;
-import com.rhc.drools.example.model.MyPerson;
-import com.rhc.drools.example.model.PersonMapper;
 import com.rhc.drools.example.persistence.Name;
 import com.rhc.drools.example.persistence.Person;
+import com.rhc.drools.example.persistence.Team;
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
+
+import java.math.BigDecimal;
+import java.util.Random;
 
 public class Runner {
 	public static void main(String[] args) {
 		//Get the KieBase
-		KieBaseProvider kbp = new KieBaseProvider("drools-usage-patterns-kjar-ages");
-		KieBase kieBaseAges = kbp.getKieBase();
+		KieBaseProvider kbp = new KieBaseProvider("drools-usage-patterns-kjar-groups");
+		KieBase kieBase = kbp.getKieBase();
+		Faker faker = new Faker(new Random(123));
+		Team teamA = new Team(faker.team().name());
+        for (int i = 0; i<20; i++) {
+            teamA.addMember(new Person(new Name(faker.name().firstName(), faker.name().lastName()), faker.number().numberBetween(14,50), faker.number().randomDouble(2,12,50)));
+        }
+        teamA.addMember(new Person(new Name("Sam","Rang"),34, faker.number().randomDouble(2,12,50)));
 
-		KieBaseProvider kbp1 = new KieBaseProvider("drools-usage-patterns-kjar-names");
-		KieBase kieBaseNames = kbp1.getKieBase();
-
-		//Continually evaluate ruleset to see changes
-		MyPerson person1 = new MyPerson(new MyName("Sal"), null);
-		MyName name1 = person1.getName();
-
-		MyPerson person2 = new MyPerson(new MyName("John"),null);
-		MyName name2 = person2.getName();
-		while (true) {
-			//Create a Fact
-
-			Person p1 = PersonMapper.peopleMap(person1);
-			Person p2 = PersonMapper.peopleMap(person2);
-			Name n1 = p1.getName();
-			Name n2 = p2.getName();
-			System.out.println("Pre-evaluation");
-			System.out.println(p1);
-			System.out.println(p2);
-
-			fireRules(kieBaseNames, Name.class, n1, n2);
-			p1.setName(n1);
-			p2.setName(n2);
-
-			System.out.println("Post-Name-evaluation");
-			System.out.println(p1);
-			System.out.println(p2);
-			//Determine age with Drools
-			fireRules(kieBaseAges, Person.class, p1, p2);
-			//fireRules(kieBaseAges, Person.class, person2);
-
-			System.out.println("Final");
-			person1 = PersonMapper.unMap(p1);
-			person2 = PersonMapper.unMap(p2);
-			//Was our age set correctly?
-			System.out.println(person1);
-			System.out.println(person2);
-
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				//That's ok
-			}
+		Team teamB = new Team(faker.team().name());
+		for (int i = 0; i<20; i++) {
+			teamB.addMember(new Person(new Name(faker.name().firstName(), faker.name().lastName()), faker.number().numberBetween(14,50), faker.number().randomDouble(2,12,50)));
 		}
-		
-	}
-	
-	private static void fireRules(KieBase kieBase, Class clazz, Object... facts) {
-		//KieSession is an interface to the drools engine
+		teamB.addMember(new Person(new Name("Sam","Rang"),34, faker.number().randomDouble(2,12,50)));
+		teamB.addMember(new Person(new Name("Sam","Rang"),25, faker.number().randomDouble(2,12,50)));
+
+		teamB.setBudget(teamB.getBudget().subtract(new BigDecimal(10.50)).setScale(2, BigDecimal.ROUND_CEILING));
+
+		Team teamC = new Team(faker.team().name());
+		for (int i = 0; i<20; i++) {
+			teamC.addMember(new Person(new Name(faker.name().firstName(), faker.name().lastName()), faker.number().numberBetween(14,50), faker.number().randomDouble(2,12,50)));
+		}
+
+		System.out.println("Pre-evaluation");
+		System.out.println("  TEAM A");
+		System.out.println(teamA.toString());
+		System.out.println("  TEAM B");
+		System.out.println(teamB.toString());
+		System.out.println("  TEAM C");
+		System.out.println(teamC.toString()+"\n\n");
+
 		KieSession kieSession = kieBase.newKieSession();
-		for(Object fact : facts) {
-			kieSession.insert(clazz.cast(fact));
-		}
+		kieSession.insert(teamA);
+		kieSession.insert(teamB);
+		kieSession.insert(teamC);
+
+		kieSession.getAgenda().getAgendaGroup("properties").setFocus();
 		kieSession.fireAllRules();
 		kieSession.dispose();
-	}
 
+        System.out.println("\n\nPost-evaluation");
+		System.out.println("  TEAM A");
+        System.out.println(teamA.toString());
+		System.out.println("  TEAM B");
+		System.out.println(teamB.toString());
+		System.out.println("  TEAM C");
+		System.out.println(teamC.toString());
+        return;
+
+	}
 }

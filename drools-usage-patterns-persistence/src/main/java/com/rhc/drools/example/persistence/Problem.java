@@ -7,7 +7,7 @@ public class Problem {
     private String status;
     private String reason;
 
-    public Problem(String status, String reason) {
+    public Problem(String reason, String status) {
         this.status = status;
         this.reason = reason;
     }
@@ -26,5 +26,12 @@ public class Problem {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Problem { ").append(status).append(", ").append(reason).append(" }");
+        return sb.toString();
     }
 }

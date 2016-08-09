@@ -10,15 +10,19 @@ import java.util.List;
 public class MyTeam {
     private String teamName;
     private List<MyPerson> members;
-    private List<MyProblem> myProblems;
+    private List<MyProblem> problems;
     private BigDecimal budget;
     private MyTeamEvaluation evaluation;
 
+    public MyTeam() {
+        this.members = new ArrayList<MyPerson>();
+        this.problems = new ArrayList<MyProblem>();
+    }
     public MyTeam(String name) {
         this.budget = new BigDecimal(0.0).setScale(2, BigDecimal.ROUND_CEILING);
         this.teamName = name;
         this.members = new ArrayList<MyPerson>();
-        this.myProblems = new ArrayList<MyProblem>();
+        this.problems = new ArrayList<MyProblem>();
         this.evaluation = new MyTeamEvaluation("Unevaluated Submitted");
     }
 
@@ -56,11 +60,11 @@ public class MyTeam {
     }
 
     public List<MyProblem> getProblems() {
-        return myProblems;
+        return problems;
     }
 
-    public void addProblem(MyProblem myProblem) {
-        this.myProblems.add(myProblem);
+    public void addProblem(MyProblem problem) {
+        this.problems.add(problem);
     }
 
     @Override
@@ -76,7 +80,7 @@ public class MyTeam {
         }
         sb.append("  }\n");
         sb.append("  myProblems: {\n");
-        for(MyProblem p : myProblems) {
+        for(MyProblem p : problems) {
             sb.append("    ").append(p.toString()).append(",\n");
         }
         sb.append("  }\n");

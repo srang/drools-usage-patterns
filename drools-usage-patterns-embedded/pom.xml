@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-embedded</artifactId>
 	<packaging>jar</packaging>
 
-	<myName>Drools Usage Patterns Embedded</myName>
+	<name>Drools Usage Patterns Embedded</name>
 
 	<dependencies>
 		<dependency>

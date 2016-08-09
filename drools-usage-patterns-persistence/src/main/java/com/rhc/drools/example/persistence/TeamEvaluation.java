@@ -6,6 +6,7 @@ package com.rhc.drools.example.persistence;
 public class TeamEvaluation {
     private String status;
 
+    public TeamEvaluation() {}
     public TeamEvaluation(String status) {
         this.status = status;
     }

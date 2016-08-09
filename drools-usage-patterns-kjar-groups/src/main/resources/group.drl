@@ -12,7 +12,7 @@ rule "check person myName"
     agenda-group "properties"
     when
         $team : Team($ppl : members)
-        $sam : Person(myName.firstName == "Sam" && age != 25) from $ppl
+        $sam : Person(name.firstName == "Sam" && age != 25) from $ppl
     then
         System.out.println("Member evaluated: "+ $sam.getName().toString());
         System.out.println("   On Team: "+ $team.getTeamName());

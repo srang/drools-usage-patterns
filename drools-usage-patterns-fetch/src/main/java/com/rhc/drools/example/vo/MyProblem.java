@@ -7,6 +7,7 @@ public class MyProblem {
     private String status;
     private String reason;
 
+    public MyProblem() {}
     public MyProblem(String reason, String status) {
         this.status = status;
         this.reason = reason;

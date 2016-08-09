@@ -5,6 +5,8 @@ public class MyName {
     private String firstName;
     private String lastName;
 
+    public MyName() {}
+
     public MyName(String firstName) {
         this(firstName,null);
     }

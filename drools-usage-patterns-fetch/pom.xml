@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-fetch</artifactId>
 	<packaging>jar</packaging>
 
-	<myName>Drools Usage Patterns Fetching</myName>
+	<name>Drools Usage Patterns Fetching</name>
 
 	<dependencies>
 		<dependency>
@@ -38,7 +38,10 @@
 			<artifactId>drools-usage-patterns-persistence</artifactId>
 			<version>${parent.version}</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>com.rhc.drools.example</groupId>
+			<artifactId>drools-usage-patterns-generic-mapper</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
 	</dependencies>
 </project>

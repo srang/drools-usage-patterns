@@ -6,6 +6,7 @@ package com.rhc.drools.example.vo;
 public class MyTeamEvaluation {
     private String status;
 
+    public MyTeamEvaluation() {}
     public MyTeamEvaluation(String status) {
         this.status = status;
     }

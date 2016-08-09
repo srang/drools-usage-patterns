@@ -15,6 +15,10 @@ public class Team {
     private BigDecimal budget;
     private TeamEvaluation evaluation;
 
+    public Team() {
+        this.members = new ArrayList<Person>();
+        this.problems = new ArrayList<Problem>();
+    }
     public Team(String name) {
         this.budget = new BigDecimal(0.0).setScale(2, BigDecimal.ROUND_CEILING);
         this.teamName = name;

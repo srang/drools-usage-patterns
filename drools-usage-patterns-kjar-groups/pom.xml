@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-kjar-groups</artifactId>
 	<packaging>jar</packaging>
 
-	<myName>Drools Usage Patterns Kjar for Teams</myName>
+	<name>Drools Usage Patterns Kjar for Teams</name>
 
 	<dependencies>
 		<dependency>

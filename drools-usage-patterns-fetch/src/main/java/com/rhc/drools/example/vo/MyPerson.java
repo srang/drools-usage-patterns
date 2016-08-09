@@ -6,6 +6,7 @@ public class MyPerson {
 	private MyName myName;
 	private Integer age;
 	private BigDecimal donation;
+
 	public MyPerson() {}
 	public MyPerson(MyName myName, Integer age, Double donation) {
 		this.myName = myName;

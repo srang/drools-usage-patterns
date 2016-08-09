@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-remote</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Patterns Remote</name>
+	<myName>Drools Usage Patterns Remote</myName>
 	
 	<dependencies>
 		<dependency>

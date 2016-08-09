@@ -3,7 +3,7 @@ import com.rhc.drools.example.persistence.Person;
 
 rule "Sal's age"
 when
-	$sal : Person(name == "Sal", age != 55)
+	$sal : Person(myName == "Sal", age != 55)
 then
 	$sal.setAge(55);
 end

@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-kjar-ages</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Patterns Kjar for Ages</name>
+	<myName>Drools Usage Patterns Kjar for Ages</myName>
 
 	<dependencies>
 		<dependency>

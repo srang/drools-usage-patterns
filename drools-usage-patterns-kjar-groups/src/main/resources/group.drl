@@ -8,11 +8,11 @@ import com.rhc.drools.example.persistence.TeamEvaluation;
 import java.math.BigDecimal;
 
 
-rule "check person name"
+rule "check person myName"
     agenda-group "properties"
     when
         $team : Team($ppl : members)
-        $sam : Person(name.firstName == "Sam" && age != 25) from $ppl
+        $sam : Person(myName.firstName == "Sam" && age != 25) from $ppl
     then
         System.out.println("Member evaluated: "+ $sam.getName().toString());
         System.out.println("   On Team: "+ $team.getTeamName());

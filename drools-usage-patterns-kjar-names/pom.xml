@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-kjar-names</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Patterns Kjar for Names</name>
+	<myName>Drools Usage Patterns Kjar for Names</myName>
 
 	<dependencies>
 		<dependency>

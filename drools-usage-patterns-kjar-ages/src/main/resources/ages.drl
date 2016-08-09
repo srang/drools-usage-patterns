@@ -4,14 +4,14 @@ import com.rhc.drools.example.persistence.Name;
 
 rule "Sal's age"
 when
-	$sal : Person(age != 55, name.getFirstName() == "Sal")
+	$sal : Person(age != 55, myName.getFirstName() == "Sal")
 then
 	$sal.setAge(55);
 end
 
 rule "Sam's age"
 when
-    $sam : Person(name.firstName == "Sam", name.lastName == "Rang")
+    $sam : Person(myName.firstName == "Sam", myName.lastName == "Rang")
 then
     $sam.setAge(28);
 end

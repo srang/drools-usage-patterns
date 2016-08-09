@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-fetch</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Patterns Fetching</name>
+	<myName>Drools Usage Patterns Fetching</myName>
 
 	<dependencies>
 		<dependency>

@@ -1,14 +1,14 @@
 package com.rhc.drools.example
 import com.rhc.drools.example.persistence.Name;
 
-rule "Sal's name"
+rule "Sal's myName"
 when
 	$sal : Name(firstName == "Sal", lastName != "Elrahal")
 then
 	$sal.setLastName("Elrahal");
 end
 
-rule "Sam's name"
+rule "Sam's myName"
 when
 	$sal : Name(firstName == "Sam", lastName != "Rang")
 then

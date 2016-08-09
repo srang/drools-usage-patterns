@@ -27,15 +27,15 @@ Alternatively you can use the script `run.sh` in this repository. This command w
 
 ```shell
 ...
-Person [name=Sal, age=55]
-Person [name=Sal, age=55]
-Person [name=Sal, age=55]
-Person [name=Sal, age=55]
-Person [name=Sal, age=55]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=55]
 ...
 ```
 
-Next, navigate to the `drools-usage-patterns-kjar` and alter the `name.drl` file to set Sal's age to 66. The file should look like this now:
+Next, navigate to the `drools-usage-patterns-kjar` and alter the `myName.drl` file to set Sal's age to 66. The file should look like this now:
 
 ```drl
 package com.rhc.drools.example
@@ -43,7 +43,7 @@ import com.rhc.drools.example.persistence.Person;
 
 rule "Sal's age"
 when
-        $sal : Person(name == "Sal", age != 66) 
+        $sal : Person(myName == "Sal", age != 66)
 then
         $sal.setAge(66);
 end
@@ -59,12 +59,12 @@ After that completes check the output of our `exec:java` command earlier. It wil
 
 ```shell
 ...
-Person [name=Sal, age=55]
-Person [name=Sal, age=55]
-Person [name=Sal, age=55]
-Person [name=Sal, age=66]
-Person [name=Sal, age=66]
-Person [name=Sal, age=66]
-Person [name=Sal, age=66]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=55]
+Person [myName=Sal, age=66]
+Person [myName=Sal, age=66]
+Person [myName=Sal, age=66]
+Person [myName=Sal, age=66]
 ...
 ```
